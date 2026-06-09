@@ -6,7 +6,7 @@
 ![python](https://img.shields.io/badge/python-3.10%2B-blue)
 ![license](https://img.shields.io/badge/license-MIT-green)
 
-> One-line version, for a recruiter: this is a tool that measures whether an AI system gives answers it can actually back up, and it checks that separately for each language, because the new EU AI Act treats that as a requirement and most evaluation tools only really work in English.
+This is a tool that measures whether an AI system gives answers it can actually back up, and it checks that separately for each language, because the new EU AI Act treats that as a requirement and most evaluation tools only really work in English.
 
 MultiFaith does two things. It scores whether the answers a RAG system produces are *grounded* in the documents it retrieved, and it audits whether the automated judges people use to do that scoring can be trusted once you leave English. The second part is the interesting one, and it is where this repo tries to say something most benchmarks do not.
 
