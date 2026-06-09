@@ -1,0 +1,67 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "multifaith"
+version = "0.1.0"
+description = "A multilingual faithfulness and judge-reliability evaluation harness for RAG, with first-class Italian and Persian support."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Majid Jafari" }]
+keywords = [
+    "nlp", "llm", "evaluation", "hallucination", "faithfulness",
+    "rag", "multilingual", "computational-linguistics",
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+# Core install stays light on purpose: the harness, metrics, data layer, and the
+# CLI run with just PyYAML. Model backends are opt-in extras so the test suite
+# and a code review need no GPU stack.
+dependencies = [
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+# LLM-as-judge backends. Pick the one matching your provider; you do not need all.
+judge = [
+    "groq>=0.11",
+    # "openai>=1.40",
+    # "anthropic>=0.34",
+]
+# NLI scorer and fine-tuned classifier baseline.
+nli = [
+    "transformers>=4.44",
+    "torch>=2.2",
+    "datasets>=2.20",
+    "scikit-learn>=1.4",
+]
+# Tables and figures for the results writeup.
+viz = [
+    "pandas>=2.2",
+    "matplotlib>=3.8",
+]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.6",
+]
+all = ["multifaith[judge,nli,viz,dev]"]
+
+[project.scripts]
+multifaith = "multifaith.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"

@@ -1,0 +1,37 @@
+# Default MultiFaith run configuration.
+#
+# A run is fully described by this file plus the model versions it names and the
+# git commit of the gold set. Keep it that way: no run parameters hidden in code.
+
+# Path to the gold set (JSONL of EvalItems).
+data: data/gold/sample.jsonl
+
+# Where judgments.jsonl and summary.txt are written.
+output_dir: results
+
+# Scorers to compare. Each needs a "type" from the registry
+# (llm_judge | nli | classifier); remaining keys go to the constructor.
+#
+# The two LLM-judge entries below are the heart of the "can the judge judge?"
+# experiment: the same method, one judging in English, one judging in the
+# target language. Comparing their per-language kappa is the finding.
+scorers:
+  - type: llm_judge
+    model: llama-3.3-70b-versatile      # set to a model your provider serves
+    name: judge_en
+    judge_in_target_language: false
+
+  - type: llm_judge
+    model: llama-3.3-70b-versatile
+    name: judge_native
+    judge_in_target_language: true
+
+  # Uncomment once you have installed the `nli` extra and picked a checkpoint.
+  # - type: nli
+  #   model_name: MoritzLaurer/mDeBERTa-v3-base-xnli-multilingual-nli-2mil7
+  #   name: nli_mdeberta
+
+  # Uncomment once you have trained a baseline checkpoint.
+  # - type: classifier
+  #   checkpoint_dir: results/classifier_ckpt
+  #   name: clf_mdeberta

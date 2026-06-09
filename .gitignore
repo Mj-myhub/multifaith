@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+
+# Tooling
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+
+# Secrets and env
+.env
+*.key
+
+# Run outputs (keep the directory, ignore generated artifacts)
+results/*
+!results/.gitkeep
+!results/FINDINGS_TEMPLATE.md
+
+# Model checkpoints
+*.bin
+*.safetensors
+*_ckpt/
+
+# OS
+.DS_Store

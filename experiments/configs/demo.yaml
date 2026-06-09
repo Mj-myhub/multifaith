@@ -1,0 +1,16 @@
+# Zero-setup demo config.
+#
+# Uses only the heuristic baseline, which needs no API key and no model download.
+# Run it right after cloning to see the harness produce real per-language and
+# per-phenomenon tables:
+#
+#     python experiments/run_eval.py --config experiments/configs/demo.yaml
+#
+# Then graduate to experiments/configs/default.yaml once you wire a real judge.
+
+data: data/gold/sample.jsonl
+output_dir: results
+
+scorers:
+  - type: heuristic
+    name: heuristic_baseline
