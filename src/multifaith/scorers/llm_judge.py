@@ -93,10 +93,15 @@ class LLMJudgeScorer(GroundednessScorer):
         string in results so a reader knows exactly which judge produced which
         numbers; judges drift between versions.
         """
-        raise NotImplementedError(
-            "Wire LLMJudgeScorer._complete to a model provider. "
-            "See the method docstring for a Groq example."
+        from groq import Groq
+
+        client = Groq()
+        resp = client.chat.completions.create(
+            model=self.model,
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0,
         )
+        return resp.choices[0].message.content
 
     def _build_prompt(self, item: EvalItem) -> str:
         prompt = JUDGE_PROMPT.format(
