@@ -35,8 +35,8 @@ Reply with a single JSON object and nothing else:
 {{"rationale": "<one sentence>", "label": "grounded|partial|ungrounded"}}
 
 - grounded:   every claim in the answer is supported by the context
-- partial:    some claims are supported, at least one is not
-- ungrounded: the main claim is unsupported by or contradicts the context
+- partial:    the answer's main claim IS supported, but it adds at least one extra detail the context does not support
+- ungrounded: the answer's main claim contradicts the context, or is not supported by it
 
 QUERY:
 {query}
